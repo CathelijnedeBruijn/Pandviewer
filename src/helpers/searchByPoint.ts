@@ -1,17 +1,9 @@
 import { queryTriply, queryResourcesDescriptions } from "./sparql";
-import { getDataByQuery} from "../bgt";
+import { getDataByQuery} from "../Query";
 
-export async function getFromCoordinates(lat : string, lng: string, zoomlevel: number ) {
-  let precisie = "20";
-  if (zoomlevel < 10){
-    precisie = "20"
-  }else if(zoomlevel > 9 && zoomlevel < 15){
-    precisie = "70"
-  }else if (zoomlevel > 14){
-    precisie = "100"
-  }
+export async function getFromCoordinates(lat : string, lng: string) {
 
-  const results = await queryTriply(getDataByQuery(lat, lng, precisie));
+  const results = await queryTriply(getDataByQuery(lat, lng));
 
   return await queryResourcesDescriptions(lat, lng, results.results.bindings.map(b => b.registratie.value));
 }

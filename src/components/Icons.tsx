@@ -1,6 +1,6 @@
 import L from "leaflet";
-import MarkerGold from "../assets/GoldMarker.png";
-import MarkerShadow from "../assets/marker-shadow.png";
+import MarkerGold from '../assets/GoldMarker.png';
+import MarkerShadow from '../assets/marker-shadow.png';
 
 /**
  * Dit is de goude leaflet icoon

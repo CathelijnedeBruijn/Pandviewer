@@ -3,10 +3,10 @@
  */
 import * as LeafletUtils from "./leaflet";
 import React from "react";
-import _ from "lodash";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as Reducer from "./reducer";
+
 
 /**
  * UI
@@ -19,11 +19,10 @@ import LayerSelectorPopup from "./components/LayerSelectorPopup";
 /**
  * Assets
  */
-import KadasterImg from "./assets/Logo-kadaster.png";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import * as sBP from "./helpers/searchByPoint";
-
+import KadasterImg from './assets/LogoKadaster.png';
 
 let _debug: any = (window as any)._debug || {};
 (window as any)._debug = _debug;
@@ -61,7 +60,7 @@ const App: React.FC = () => {
      //  */
     React.useEffect(() => {
         if (state.coordinateQuery) {
-            sBP.getFromCoordinates(state.coordinateQuery.lat, state.coordinateQuery.lng, state.zoomLevel)
+            sBP.getFromCoordinates(state.coordinateQuery.lat, state.coordinateQuery.lng)
                 .then(res => {
                     dispatch({type: "coordinate_search_success", results: res as any});
                 })
@@ -113,13 +112,13 @@ const App: React.FC = () => {
             <div className="headerEtc">
                 <div onClick={() => dispatch({type: "reset"})}>
                     <div className="header">
-                        <h1>BGT LDMaps</h1>
+                        <h1>Pandviewer</h1>
                         <img src={KadasterImg} alt="kadaster logo"/>
                     </div>
                 </div>
                 <div className="startText">
-                    <p>Ontdek de objecten uit de Basisregistratie Grootschalige Topografie op de kaart van Nederland
-                        door op de kaart te klikken met de rechtermuisknop.</p>
+                    <p>Ontdek de gebouwen van Nederland door op de kaart van Nederland te klikken met de rechtermuisknop. Er zal informatie zichtbaar worden over het gebouw. Deze informatie komt
+                    uit de Basisregistratie Grootschalige Topografie, Basisregistratie Adressen en Gebouwen en de Basisregistratie Topografie.</p>
                 </div>
             </div>
             <div className={state.isFetching ? "mapHolderLoading" : "mapHolder"}

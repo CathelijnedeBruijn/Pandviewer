@@ -2,8 +2,8 @@
 *.d.ts
 *.js.map
 
-./node_modules
-./.idea
-./build
+./node_modules/
+./.idea/
+./build/
 
 .DS_Store

@@ -1,6 +1,6 @@
 import * as wellKnown from "wellknown";
 import _ from "lodash";
-import {getDataByQuery, sparqlApi} from "../bgt";
+import {getDataByQuery, sparqlApi} from "../Query";
 import {SingleObject} from "../reducer";
 export interface SparqlResults {
     head: Head;
@@ -34,7 +34,7 @@ export type BindingValue =
  * @param results
  */
 export async function queryResourcesDescriptions(lat: string, lng: string, iris: string[]) : Promise<SingleObject[]>{
-    let res = await queryTriply(getDataByQuery(lat, lng, "100"));
+    let res = await queryTriply(getDataByQuery(lat, lng, ));
 
     //The sparql results for 1 iri may span multiple rows. So, group them
     const groupedByIri = _.groupBy(res.results.bindings, b => b.registratie.value); //s is the iri variable name

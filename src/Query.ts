@@ -1,7 +1,9 @@
 export const sparqlApi = "https://api.labs.kadaster.nl/datasets/kadaster/bgt/services/bgt/sparql"
 
-export function getDataByQuery(lat: string, long: string, precisie: string){
+export function getDataByQuery(lat: string, long: string){
     return `
+
+
 prefix bgt: <https://bgt.basisregistraties.overheid.nl/bgt/def/>
 prefix bif: <http://www.openlinksw.com/schemas/bif#>
 prefix geo: <http://www.opengis.net/ont/geosparql#>
@@ -16,7 +18,7 @@ bind(bif:ST_Transform(?point, 28992) as ?pointRd)
     bgt:geometrie ?rd;
 bgt:type ?type.
     ?type rdfs:label ?shapeTooltip.
-filter(bif:st_within(?pointRd, ?rd, ${precisie}))
+filter(bif:st_within(?pointRd, ?rd))
 bind(bif:ST_Transform(?rd, 4326) as ?shape)
 
 bind(
